@@ -1,0 +1,225 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: queue-register
+
+# app and org for use with dashboard.serverless.com
+# app: queue_register
+# org: queue_register
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+  lambdaHashingVersion: 20201221
+  stage: dev
+  role: arn:aws:iam::840013303383:role/lambda_queue_register
+  environment:
+    PROD: true
+    PRIVATE_KEY: ${env:PRIVATE_KEY}
+    CACHE: 180
+  httpApi:
+    cors: true
+
+functions:
+  #ENTITY
+  entityList:
+    handler: api/http_entity.list
+    events:
+      - httpApi:
+          method: get
+          path: /entity
+
+  entityGet:
+    handler: api/http_entity.get
+    events:
+      - httpApi:
+          method: get
+          path: /entity/{entityId}
+
+  entityPut:
+    handler: api/http_entity.put
+    events:
+      - httpApi:
+          method: put
+          path: /entity
+
+  # INFORMATION
+  infoGet:
+    handler: api/http_information.get
+    events:
+      - httpApi:
+          method: get
+          path: /information/{entityId}/{type}
+
+  infoPost:
+    handler: api/http_information.post
+    events:
+      - httpApi:
+          method: post
+          path: /information
+
+  # timeslot
+  timeslotList:
+    handler: api/http_timeslot.list
+    events:
+      - httpApi:
+          method: get
+          path: /timeslots
+
+  timeslotsGetQuery:
+    handler: api/http_timeslot.getQuery
+    events:
+      - httpApi:
+          method: get
+          path: /timeslots/{entity}
+
+  timeslotsGetDate:
+    handler: api/http_timeslot.get
+    events:
+      - httpApi:
+          method: get
+          path: /timeslots/{entity}/{date}
+
+  timeslotsPost:
+    handler: api/http_timeslot.post
+    events:
+      - httpApi:
+          method: post
+          path: /timeslots
+
+  timeslotsPut:
+    handler: api/http_timeslot.put
+    events:
+      - httpApi:
+          method: put
+          path: /timeslots
+
+  # register
+  registerPost:
+    handler: api/http_register.post
+    events:
+      - httpApi:
+          method: post
+          path: /register
+
+  registerGet:
+    handler: api/http_register.get
+    events:
+      - httpApi:
+          method: get
+          path: /register/{userId}
+
+  # User
+  userCreate:
+    handler: api/http_user.post
+    events:
+      - httpApi:
+          method: post
+          path: /users
+
+  userGet:
+    handler: api/http_user.get
+    events:
+      - httpApi:
+          method: get
+          path: /users/{userId}
+
+  userPut:
+    handler: api/http_user.put
+    events:
+      - httpApi:
+          method: put
+          path: /users
+
+  # Report
+  reportReserved:
+    handler: api/http_report.reserved
+    events:
+      - httpApi:
+          method: post
+          path: /report/reserved
+
+  # STREAM
+  streamTimeToDate:
+    handler: stream/timeslot_time_to_date.handler
+    events:
+      - stream: arn:aws:dynamodb:ap-southeast-1:840013303383:table/Q_Timeslot_Time_Level/stream/2021-07-31T05:50:28.519
+
+  # JWT
+  adminJwt:
+    handler: auth/admin_jwt.handler
+
+  clearJwt:
+    handler: auth/clear_jwt.handler
+
+  mobileJwt:
+    handler: auth/mobile_jwt.handler
+
+  #TOKEN JWT
+  tokenPost:
+    handler: api/http_token.post
+    events:
+      - httpApi:
+          method: post
+          path: /token
+
+  #TIMESTAMP
+  serverOpenTime:
+    handler: api/http_server.openTime
+    events:
+      - httpApi:
+          method: get
+          path: /server/opentime
+
+  serverTimestamp:
+    handler: api/http_server.timestamp
+    events:
+      - httpApi:
+          method: get
+          path: /server/timestamp
+
+  # CLAER
+  clearAny:
+    handler: api/http_clear.any
+    events:
+      - httpApi:
+          method: post
+          path: /clear
+
+  # LOAD-TEST
+  lambdaMassRequest:
+    handler: load_test/lambdaMassRequest.handler
+
+  lambdaMassRequest2:
+    handler: load_test/lambdaMassRequest.handler2
+    desc: infinity loop
+
+  loadTestPut:
+    handler: load_test/http_test_dynamodb.put
+    events:
+      - httpApi:
+          method: post
+          path: /loadtest/dynamodb_put
+
+plugins:
+  - serverless-prune-plugin
+  - serverless-dotenv-plugin
+custom:
+  prune:
+    automatic: true
+    number: 2

@@ -1,0 +1,23 @@
+ 
+###
+POST https://hqfq6pwuqf.execute-api.ap-southeast-1.amazonaws.com/register
+content-type: application/json
+Authorization: Bearer eyJraWQiOiIwZjdhYzBmOGEyMmUxMzFiNWZlNzVhOWNlMTY5OWFjYTE1MGY3ZjZjMGVkNzVlMjgyYjNiZjdmYjA5N2E3NjNlIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTI3OTU3ZTEzNjIxOTQwYjcyYzcwMTg1NWIzZmRlNmE1IiwiYXVkIjoiMTY1NjI1NzM0NyIsImV4cCI6MTYyNzYyMTI5NywiaWF0IjoxNjI3NjE3Njk3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoidXRwIiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoT3pIdGJISmxFRlYxRFRua041ZHZBa2xJSGpnQ0l4WWREV3hZTjFFS0cyRlFQUWNFSFR4ZU93QUZHMlJRYlZkVVREZ01ZUU1GUm13SSJ9.XOo2zEeSflwJH06gHN9a7_bJnpx3vr1IeP5HF_55-dWoB-EDm_jXMgl5X1_k4VLEPIEPBYOCzpJ_UEGMyBozDg
+
+{
+    "name" : "RICE",
+   "reserveToken": "035ebdf2b83a15c7556b4f347a4ff88c87ffbb7ac5f8b89008612d8f317e42a8fb05715ec0fdb4ba03c608d33618095f2s7tuTJANiGzoUI3Vri557NB2vyjPdUxqdjJj4+bMZwfuc33o3XPQEy3aIzMIJqnOH6lfXCMA6lEBFD/6Z5q0zzj6vgug0JDeE+iryN0cmT1XQLA+QVA5/W+6cXTU5PXl2Uy8Pzk9OSBex0dHJsY/ewtanZLjN5fvvPz+Q022GY=",
+   // # "entityId" : "1111",
+   // #  "time" : "1300-1400",
+  //  # "date" : "2021-10-12",
+  //  # "idCardNumber" : "012345",
+     "date": "0001-01-01",
+        "time": "0000-0100",
+        "entityId": "0000",
+        "userId": "10",
+        "idCardNumber":"10"
+}
+
+
+###
+GET https://hqfq6pwuqf.execute-api.ap-southeast-1.amazonaws.com/register/0000

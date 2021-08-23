@@ -1,0 +1,59 @@
+@base_url = https://cloudfront.api.xn--42c6cjhs2b6b5k.com/v1
+@entity_id = 0001
+@id_card= 1101400842210
+
+### -----WELCOME
+### entity
+GET  {{base_url}}/entity/{{entity_id}}
+
+### timeslot-entity
+GET  {{base_url}}/timeslots/{{entity_id}}
+
+
+### server-opentime
+GET  {{base_url}}/server/opentime
+
+### server-timestamp
+GET  {{base_url}}/server/timestamp
+
+
+
+
+### -----PRE_REGISTER
+GET  {{base_url}}/information/{{entity_id}}/pre_register
+
+
+
+### -----FORM
+### entity
+POST  {{base_url}}/token
+content-type: application/json
+
+
+{
+    "entityId" : {{entity_id}},
+    "idCardNumber" : "1100011",
+    "date" : "2021-10-12"
+
+}
+
+
+### -----RESERVE
+### timeslot-entity-date
+GET  {{base_url}}/timeslots/{{entity_id}}/2021-08-19
+
+
+### -----My-RESERVE
+GET  {{base_url}}/register/{{id_card}}
+
+
+
+### CLEAR
+POST {{base_url}}/clear
+content-type: application/json
+Authorization: bearer niceloop
+
+{
+    "entityId" : {{entity_id}},
+    "source" : "timeslots"
+}

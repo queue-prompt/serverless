@@ -1,0 +1,23 @@
+config:
+  target: "https://cloudfront.api.xn--42c6cjhs2b6b5k.com/v1"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 50
+      name: Sustained load
+
+scenarios:
+  - name: "post"
+    flow:
+      - post:
+          url: "/server/opentime"
+          json:
+            entityId: "1232131"
+            idCardNumber: "1232131"
+            date: "1232144"

@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.23.0",
+    "@aws-sdk/client-lambda": "^3.26.0",
+    "@aws-sdk/client-sqs": "^3.23.0",
+    "@aws-sdk/credential-provider-ini": "^3.24.0",
+    "@aws-sdk/lib-dynamodb": "^3.23.0",
+    "@aws-sdk/util-dynamodb": "^3.23.0",
+    "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "node-cache": "^5.1.2",
+    "object-path": "^0.11.5",
+    "percentile": "^1.5.0",
+    "simple-encryptor": "^4.0.0",
+    "uuid": "^8.3.2"
+  },
+  "name": "serverless",
+  "version": "1.0.0",
+  "main": "awsInstance.js",
+  "devDependencies": {
+    "mocha": "^9.0.3",
+    "serverless-dotenv-plugin": "^3.9.0",
+    "serverless-prune-plugin": "^1.5.1",
+    "should": "^13.2.3"
+  },
+  "scripts": {
+    "deploy": "serverless deploy --aws-profile queue_register",
+    "test": "mocha  --bail  ",
+    "deploy_function": "serverless deploy --aws-profile queue_register function -f "
+  },
+  "author": "Warit Tantivirasut",
+  "license": "ISC",
+  "description": ""
+}
