@@ -1,8 +1,0 @@
-@base_url = https://api.xn--42c6cjhs2b6b5k.com/v1
-@entity_id = "553755"
-@id_card= 1101400842210
-
-### -----WELCOME
-### entity
-GET  {{base_url}}/users/1235
-Authorization: bearer niceloop

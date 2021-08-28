@@ -12,6 +12,7 @@
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "loadtest": "^5.1.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "node-cache": "^5.1.2",

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn deploy_function clear
+  /usr/local/bin/node /usr/local/bin/yarn deploy_funtion lambdaMassRequest2
 
 PATH: 
   /Users/rice/google-cloud-sdk/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/lib/node_modules/npm/bin:/usr/local/go/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/rice/google-cloud-sdk/bin
@@ -28,6 +28,7 @@ npm manifest:
       "http": "^0.0.1-security",
       "https": "^1.0.0",
       "jsonwebtoken": "^8.5.1",
+      "loadtest": "^5.1.2",
       "lodash": "^4.17.21",
       "moment": "^2.29.1",
       "node-cache": "^5.1.2",
@@ -41,6 +42,7 @@ npm manifest:
     "main": "awsInstance.js",
     "devDependencies": {
       "mocha": "^9.0.3",
+      "serverless-dotenv-plugin": "^3.9.0",
       "serverless-prune-plugin": "^1.5.1",
       "should": "^13.2.3"
     },
@@ -1869,16 +1871,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 1
-  Command: sh
-  Arguments: -c serverless deploy --aws-profile queue_register function -f  clear
-  Directory: /Users/rice/queue_register/serverless
-  Output:
-  
-      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:210:5)
-      at maybeClose (internal/child_process.js:1021:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:283:5)
+  Error: Command "deploy_funtion" not found. Did you mean "deploy_function"?
+      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:87307:17
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (/usr/local/lib/node_modules/yarn/lib/cli.js:23451:28)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:95:12
+      at runCommand (/usr/local/lib/node_modules/yarn/lib/cli.js:87312:22)
+      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:87412:14)

@@ -2,21 +2,33 @@
 const { lambdaClient } = require('../awsInstance')
 const { InvokeCommand, InvokeCommandInput } = require("@aws-sdk/client-lambda");
 
-init()
-async function init() {
+init(1)
+async function init(instanceCount) {
 
 
     let pAll = []
-    for (let index = 0; index < 200; index++) {
+    for (let index = 0; index < instanceCount; index++) {
         // const element = array[index];
 
+        // let data = {
+        //     url: "https://cloudfront.api.คิวพร้อม.com/v1/loadtest/dynamodb_put",
+        //     requestSize: 2500,
+        //     batchSize: 10,  // open socket.
+        //     data: { good: true },
+        // methos: 'post',
+
+        //     key: 'uuid',  //need to random
+        //     name: 'instane ' + index
+        // }
+
         let data = {
-            url: "https://cloudfront.api.คิวพร้อม.com/v1/loadtest/dynamodb_put",
-            requestSize: 2500,
-            batchSize: 10,  // open socket.
+            url: "https://api.คิวพร้อม.com/v1/server/opentime",
+            requestSize: 1000,
+            batchSize: 300,  // open socket.
+            methos: 'get',
             data: { good: true },
             key: 'uuid',  //need to random
-            name: 'instane ' + index
+            name: 'instane#' + index
         }
 
         console.log('start' + index)

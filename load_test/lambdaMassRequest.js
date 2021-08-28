@@ -39,7 +39,7 @@ module.exports.handler = async (event) => {
 
     console.log(event);
 
-    let { batchSize, requestSize, url, data, key, name } = event
+    let { batchSize, requestSize, url, data, key, name, method } = event
     let s_all = new Date().valueOf()
 
     //create array number 10K, 
@@ -53,15 +53,23 @@ module.exports.handler = async (event) => {
         let promiseList = [];
         for (let j = 0; j < batch.length; j++) {
 
-            const dataPost = {
-                ...data,
-                [key]: uuid.v4(),
-                index: j
+            let p = null
+            if (method == 'post') {
+
+                const dataPost = {
+                    ...data,
+                    [key]: uuid.v4(),
+                    index: j
+                }
+                p = instance.post(url, dataPost)
+            } else {
+                p = instance.get(url)
+
             }
-            let p = instance.post(url, dataPost)
             promiseList.push(p);
         }
         let res2 = await Promise.all(promiseList);
+        console.log('done ' + index)
         res.push(res2)
     }
     let time = []
@@ -70,7 +78,7 @@ module.exports.handler = async (event) => {
             // console.log(a.headers['request-duration'])
             return a.headers['request-duration']
         })
-        time.push(timeList)
+        // time.push(timeList)
 
     });
     let arrayDurationTime = _.flattenDeep(time)
@@ -100,44 +108,43 @@ module.exports.handler = async (event) => {
     // let data = documentClient.put(params).promise()
 }
 
+// let data = {
+//     url: "https://api.คิวพร้อม.com/v1/server/opentime",
+//     requestSize: 200000,
+//     batchSize: 100,  // open socket.
+//     methos: 'get',
+//     data: { good: true },
+//     key: 'uuid',  //need to random
+//     name: 'instane#' + 1
+// }
+// module.exports.handler(data)
 
 
 module.exports.handler2 = async (event) => {
 
-    console.log(event)
-    let { batchSize, requestSize, url, data, key, name } = event
+    const loadtest = require('loadtest');
+    const options = {
+        url: 'https://api.xn--42c6cjhs2b6b5k.com/v1/server/opentime',
+        maxRequests: 200000,
+        concurrency: 200,
+        agentKeepAlive: true
+    };
+    let p = new Promise((resolve) => {
+        console.log("start " + new Date().toLocaleString())
 
-    let i = 0
-    let total = 0
-    let success = 0;
-    let fail = 0;
-    let pList = []
-    while (i < requestSize) {
-        total++
-        const dataPost = {
-            ...data,
-            [key]: uuid.v4(),
-            name
-        }
-        let p1 = instance.post(url, dataPost)
-            .then(function () {
-                success++
-            }).catch(function () {
-                fail++
-            })
-        pList.push(p1)
-        if (total % 1000 == 0) {
-            console.log(`${name} : ${total} passed,  (${success}/${fail})`)
-        }
-        i++
-    }
-
-    await Promise.all(pList)
-
-
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('good')
-        }, 30000)
+        loadtest.loadTest(options, function (error, result) {
+            if (error) {
+                return console.error('Got an error: %s', error);
+            }
+            console.log(result, null, 2)
+            console.log('Tests run successfully');
+            resolve(result)
+        });
     })
+
+    let r = await p
+
+    console.log("ALL DONE")
+    return r
 }
+// module.exports.handler2()//
