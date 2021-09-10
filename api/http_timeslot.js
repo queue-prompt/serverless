@@ -156,7 +156,7 @@ module.exports.getQuery = async (event) => {
     let today = getTodayYYYY_MM_DD()
     dataRes = _.reduce(dataRes, (acc, d, date) => {
 
-        if (d.open >= 1 && date > today) {
+        if (d.open >= 1 && date >= today) {
             acc[date] = d
         }
         return acc

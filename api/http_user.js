@@ -49,7 +49,9 @@ module.exports.post = async (event) => {
         ...data,
         entityId: entityId.toString(),
         userId: data.uid,
-        createAt: new Date().toISOString()
+        createAt: new Date().toISOString(),
+        reserveMode: 0,
+        reserveValue: 1,
     };
 
     //svee user

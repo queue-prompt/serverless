@@ -6,25 +6,24 @@ const { success } = require('../utils/http_response');
 const OPEN_LONGER_THAN_BIUSINESS_HOUR = 1000 * 60 * 60 * 9
 module.exports.openTime = async (event) => {
 
-    let now = moment().utcOffset("+07:00");;
-
-    let _9am = moment().utcOffset("+07:00").set("hour", 9).set('minute', 0).set('second', 0);
-
-    let diffMS = _9am.valueOf() - now.valueOf()
-    let delay = 0;
-    let cacheTime = 10  //sec
-
-    if (diffMS > 0) {
-        //ยังไม่เลย 09:00
-        delay = diffMS
-        cacheTime = 10  //10 sec
-    } else {
-        //เลย 09:00   
-        delay = 0
-        cacheTime = 60 * 30  //cache 30 mins
+    console.log(event)
+    let { date, time } = event.queryStringParameters || {
+        date: moment().utcOffset("+07:00").set("hour", 9).set('minute', 0).set('second', 0).format("YYYY-MM-DD"),
+        time: '0900'
     }
 
+    let now = moment().utcOffset("+07:00");;
+
+    let target = moment(`${date}T${time}`, 'YYYY-MM-DDTHH:mm').utcOffset("+07:00", true).set('second', 0);
+
+    let diffMS = target.valueOf() - now.valueOf()
+
+    let cacheTime = 0; //sec
+
+    let delay = diffMS <= 0 ? 0 : diffMS
+
     return success({
+        target: target.format('YYYY-MM-DDTHH:mm:ss'),
         delay: delay, //ms
         today: getTodayYYYY_MM_DD(),
         tomorrow: getTomorrowYYYY_MM_DD(),
@@ -36,27 +35,12 @@ module.exports.openTime = async (event) => {
 
 module.exports.timestamp = async (event) => {
 
-    let now = moment().utcOffset("+07:00");;
 
-    let _9am = moment().utcOffset("+07:00").set("hour", 9).set('minute', 0).set('second', 0);
-
-    let diffMS = _9am.valueOf() - now.valueOf()
-    let delay = 0
-    if (diffMS > 0) {
-        //ยังไม่เลย 09:00
-        delay = diffMS
-    } else if (diffMS < 0 && Math.abs(diffMS) < OPEN_LONGER_THAN_BIUSINESS_HOUR) {
-        //เลย 09:00  แต่ยังอยู่ในเวลางาน
-        delay = 0
-    } else {
-        // ไปรอ 09:00 next day
-        _9am.add(1, 'day').valueOf()
-        let diffMS_Tomorrow = _9am.valueOf() - now.valueOf()
-        delay = diffMS_Tomorrow
-    }
 
     return success({
-        timestamp: new Date().valueOf() //ms
-    }, { cache: 10 })
+        timestamp: new Date().valueOf(),//ms
+        today: getTodayYYYY_MM_DD(),
+        tomorrow: getTomorrowYYYY_MM_DD(),
+    }, { cache: 0 })
 
 };

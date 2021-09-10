@@ -25,7 +25,10 @@ module.exports.list = async (event) => {
 module.exports.get = async (event) => {
 
     console.log(event)
-
+    let _default = {
+        reserveMode: 0,
+        reserveValue: 1,
+    }
 
     let entityId = event.pathParameters.entityId
     let res = await entityService.get(entityId)
