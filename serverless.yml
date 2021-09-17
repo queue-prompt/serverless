@@ -160,6 +160,11 @@ functions:
     events:
       - stream: arn:aws:dynamodb:ap-southeast-1:840013303383:table/Q_Timeslot_Time_Level/stream/2021-07-31T05:50:28.519
 
+  streamNewRegisterNotification:
+    handler: stream/new_register_send_email.handler
+    events:
+      - stream: arn:aws:dynamodb:ap-southeast-1:840013303383:table/Q_Register/stream/2021-07-29T11:32:32.909
+
   # JWT
   adminJwt:
     handler: auth/admin_jwt.handler

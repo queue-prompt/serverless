@@ -18,7 +18,7 @@ module.exports.openTime = async (event) => {
 
     let diffMS = target.valueOf() - now.valueOf()
 
-    let cacheTime = 0; //sec
+    let cacheTime = 5; //sec
 
     let delay = diffMS <= 0 ? 0 : diffMS
 
@@ -41,6 +41,6 @@ module.exports.timestamp = async (event) => {
         timestamp: new Date().valueOf(),//ms
         today: getTodayYYYY_MM_DD(),
         tomorrow: getTomorrowYYYY_MM_DD(),
-    }, { cache: 0 })
+    }, { cache: 5 })
 
 };
