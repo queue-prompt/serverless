@@ -7,7 +7,7 @@ module.exports.handler = async (event) => {
     for (let index = 0; index < records.length; index++) {
         const element = records[index];
 
-        if (element.eventName == "INSERT" || 1) {
+        if (element.eventName == "INSERT") {
             let newImage = element.dynamodb.NewImage;
             let data = unmarshall(newImage);
             console.log(data)
