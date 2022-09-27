@@ -88,11 +88,11 @@ describe('timeslot update handler ', function () {
 
     describe('ทดสอบ OPEN command', function () {
 
-        it('แก้ไข open เพิ่ม ', async function () {
+        it('แก้ไข open เพิ่ม ', function () {
 
         });
 
-        it('แก้ไข open ให้น่อยกว่า reserve ', async function () {
+        it('แก้ไข open ให้น่อยกว่า reserve ', function () {
 
         });
 
@@ -101,11 +101,11 @@ describe('timeslot update handler ', function () {
 
     describe('ทดสอบ REMOVE command', function () {
 
-        it('ลบตัวที่ไม่มีคนจอง', async function () {
+        it('ลบตัวที่ไม่มีคนจอง', function () {
 
         });
 
-        it('ลบตัวที่มีคนจองแล้ว', async function () {
+        it('ลบตัวที่มีคนจองแล้ว', function () {
 
         });
 
@@ -114,7 +114,7 @@ describe('timeslot update handler ', function () {
 
     describe('ทดสอบ Active command', function () {
 
-        it('ตั้ง ปิด ของวันนั้นๆ', async function () {
+        it('ตั้ง ปิด ของวันนั้นๆ', function () {
 
         });
 
